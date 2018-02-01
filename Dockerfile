@@ -13,10 +13,11 @@ RUN (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == system
  && rm -f /lib/systemd/system/basic.target.wants/* \
  && rm -f /lib/systemd/system/anaconda.target.wants/*
 
-# Install EPEL repo and PIP
-RUN yum -y install \
-    epel-release \
-    python-pip \
+# Install EPEL repo (first)
+RUN yum -y install epel-release
+
+# Install PIP (after)
+RUN yum -y install python-pip \
  && yum -y clean all
 
 RUN pip install --upgrade setuptools \
