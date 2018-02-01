@@ -4,12 +4,12 @@ FROM centos:7
 LABEL maintainer="François KUBLER"
 
 # Install systemd -- See https://hub.docker.com/_/centos/
-RUN yum -y remove
+RUN yum -y remove \
     fakesystemd \
- && yum -y install
+ && yum -y install \
     python-pip \
     systemd \
-    systemd-libs
+    systemd-libs \
  && yum -y clean all
 
 RUN (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == systemd-tmpfiles-setup.service ] || rm -f $i; done) \
