@@ -20,9 +20,9 @@ RUN yum -y install epel-release
 RUN yum -y install python-pip \
  && yum -y clean all
 
-RUN pip install --upgrade setuptools \
- && pip install wheel \
- && pip install ansible
+RUN python -m pip install --disable-pip-version-check --upgrade "pip < 21.0" \
+ && python -m pip install --upgrade setuptools \
+ && python -m pip install wheel ansible molecule[docker,lint]
 
 RUN mkdir -p /etc/ansible
 ADD hosts /etc/ansible/
